@@ -1,7 +1,8 @@
 class Pessoa {
-    constructor(nome, idade) {
+    constructor(nome, idade, dataNascimento) {
         this.nome = nome;
         this.idade = idade;
+        this.dataNascimento = dataNascimento;
     }
 
     dizerNome() {
@@ -9,15 +10,15 @@ class Pessoa {
     }
 
     fazerAniversario() {
-        this.idade = idade + 1;
+        this.idade = this.idade + 1;
     }
-}
+} 
 
 const bruxos = [
     new Pessoa('Harry', 17),
     new Pessoa('Ronny', 17),
     new Pessoa('Hermione', 16),
-    new Pessoa('Dumbledore', 297)
+    //new Pessoa('Dumbledore', 297)
 ];
 
 const trouxas = [
@@ -33,7 +34,11 @@ const pessoas = [ ...trouxas, ...bruxos ];
 const { nome, idade } = pessoas[0];
 console.log(`${nome} é o primeiro da lista e tem ${idade} anos.`);
 
-const nomesAdultos = pessoas.filter(p => p.idade >= 18).map(p => p.nome);
+
+const nomesAdultos = 
+    pessoas
+    .filter(p => p.idade >= 18)
+    .map(p => p.nome);
 console.log('Nome de adultos:');
 for (let pessoa of nomesAdultos) {
     console.log(pessoa);
@@ -45,12 +50,13 @@ for (let letra of palavra) {
     console.log(letra);
 }
 
-const somaIdades = pessoas.reduce((prev, cur) => prev + cur.idade, 0);
+const somaIdades = pessoas
+    .reduce((prev, cur) => prev + cur.idade, 0);
 console.log(`Soma das idades: ${somaIdades}`)
 
-fetch('http://localhost:8000/api/pokemons')
-    .then(response => response.json())
-    .then(content => console.log(content[0]))
-    .catch(error => console.error(error.message));
+fetch('http://10.120.6.140:8000/api/pokemons')
+     .then(response => response.json())
+     .then(content => console.log(content[1]))
+     .catch(error => console.error(error.message));
 
 console.log('esperando...');

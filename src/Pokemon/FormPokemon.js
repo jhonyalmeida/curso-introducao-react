@@ -23,6 +23,7 @@ class FormPokemon extends Component {
     onChange(event) {
         const property = event.target.name;
         this.setState({ [property]: event.target.value });
+        //alert(this.state.numero);
     }
 
     onAppendFile(event) {

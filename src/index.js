@@ -6,6 +6,7 @@ import App from './App';
 import registerServiceWorker from './registerServiceWorker';
 import ViewListaPokemon from './Pokemon/ViewListaPokemon';
 import ViewCadastroPokemon from './Pokemon/ViewCadastroPokemon';
+import ListaTipos from './Tipo/ListaTipos';
 
 class PokemonApp extends React.Component {
 
@@ -22,5 +23,8 @@ class PokemonApp extends React.Component {
 
 }
 
-ReactDOM.render(<PokemonApp />, document.getElementById('root'));
+ReactDOM.render(<PokemonApp />, 
+    document.getElementById('raiz'));
 registerServiceWorker();
+
+

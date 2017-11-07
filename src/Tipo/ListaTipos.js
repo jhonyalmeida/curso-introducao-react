@@ -14,13 +14,17 @@ class ListaTipos extends Component {
 
     render() {
         const tipos = this.state.tipos;
-        return (
-            <ul>
-                {tipos.map(tipo => (
-                    <li key={tipo.id}>{tipo.nome}</li>
-                ))}
-            </ul>
-        );
+        if (tipos.length > 0) {
+            return (
+                <ul>
+                    {tipos.map(tipo => (
+                        <li key={tipo.id}>{tipo.nome}</li>
+                    ))}
+                </ul>
+            );
+        } else {
+        return (<div><br/><br/><p>Carregando...</p></div>);
+        }
     }
 
 }
