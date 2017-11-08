@@ -1,68 +1,58 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import './ViewListaPokemon.css'
+import Pokemon from './Pokemon'
 import servidor from './../servidor';
 
 class ViewListaPokemon extends Component {
 
     constructor(props) {
         super(props);
+        this.onChange = this.onChange.bind(this);
         this.state = { 
             loading: true,
+            search: '',
             pokemons: [] 
         };
     }
 
     componentDidMount() {
-        servidor.getPokemons().then(pokemons => {
+        this.buscar();
+    }
+
+    buscar(nome = '') {
+        servidor.getPokemons(nome).then(pokemons => {
             this.setState({ pokemons, loading: false });
         }).catch(error => {
             this.setState({ loading: false, error: error.message });
         });
     }
 
-    renderTable(pokemons) {
-        return (
-            <div className="container">
-                <table className="table table-hover">
-                    <thead>
-                        <tr>
-                            <th>Nº</th>
-                            <th>Nome</th>
-                            <th>Descrição</th>
-                            <th></th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {pokemons.map(p => (
-                            <tr key={p.id}>
-                                <td>{p.numero}</td>
-                                <td>{p.nome}</td>
-                                <td>{p.descricao}</td>
-                                <td>
-                                    <img height="64" width="64" 
-                                        src={p.linkImagem} alt={p.nome} />
-                                </td>
-                            </tr>
-                        ))}
-                    </tbody>
-                </table>
-                <Link className="btn btn-default" to="/cadastro">Novo</Link>
-            </div>
-        );
+    onChange(event) {
+        this.buscar(event.target.value);
     }
 
     render() {
         const pokemons = this.state.pokemons;
-        if (this.state.loading) {
-            return <p>Carregando...</p>;
-        }
-        if (this.state.error) {
-            return <p>Erro ao obter os dados: {this.state.error}</p>;
-        }
-        return pokemons.length > 0 
-            ? this.renderTable(pokemons) 
-            : <p>Nenhum pokémon encontrado.</p>;
+        return (
+            <div className="container">
+                <div className="row">
+                    <input type="text" className="form-control" onChange={this.onChange} />
+                </div>
+                <div>
+                    {this.state.loading && <p>Carregando...</p>}
+                    {this.state.error && <p>Erro ao obter os dados: {this.state.error}</p>}
+                    {pokemons.map(p => (
+                        <Pokemon pokemon={p} key={p.id} />
+                    ))}
+                </div>
+                <div className="btn-add">
+                    <Link className="btn btn-default" to="/cadastro">
+                        <span className="glyphicon glyphicon-plus"></span>
+                    </Link>
+                </div>
+            </div>
+        );
     }
 
 }

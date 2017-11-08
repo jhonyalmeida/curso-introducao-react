@@ -1,13 +1,14 @@
 //URL do servidor, alterar conforme necessário
-const SERVER_URL = 'http://10.120.6.140:8000/api';
+//const SERVER_URL = 'http://10.120.6.140:8000/api';
+const SERVER_URL = 'http://localhost:8000/api';
 
 function getTipos() {
     return fetch(`${SERVER_URL}/tipos`)
         .then(res => res.json());
 }
 
-function getPokemons() {
-    return fetch(`${SERVER_URL}/pokemons`)
+function getPokemons(nome = '') {
+    return fetch(`${SERVER_URL}/pokemons?nome=${nome}`)
         .then(res => res.json());
 }
 

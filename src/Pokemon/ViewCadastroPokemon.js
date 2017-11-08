@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { withRouter } from 'react-router-dom';
 import FormPokemon from './FormPokemon';
 import servidor from './../servidor';
 
@@ -15,8 +16,10 @@ class ViewCadastroPokemon extends Component {
     }
 
     submit(formData) {
-        servidor.createPokemon(formData)
-            .then(p => alert(`${p.nome} inserido na agenda!`));
+        servidor.createPokemon(formData).then(p => {
+            alert(`${p.nome} inserido na agenda!`);
+            this.props.history.push('/');
+        });
     }
 
     render() {
@@ -30,4 +33,4 @@ class ViewCadastroPokemon extends Component {
 
 }
 
-export default ViewCadastroPokemon;
+export default withRouter(ViewCadastroPokemon);

@@ -21,7 +21,7 @@ function renderField(type, props) {
 
 const FormField = (props) => {
     const label = props.label;
-    const colSize = props.colSize || 4;
+    const colSize = props.colSize || 6;
     const field = renderField(props.type, props);
     return (
         <div className="row">
