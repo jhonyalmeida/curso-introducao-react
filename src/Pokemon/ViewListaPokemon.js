@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
-import './ViewListaPokemon.css'
-import Pokemon from './Pokemon'
-import servidor from './../servidor';
+import './ViewListaPokemon.css';
+import Pokemon from './Pokemon';
+import servidor from './../Core/servidor'
 
 class ViewListaPokemon extends Component {
 
