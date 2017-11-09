@@ -1,5 +1,4 @@
 //URL do servidor, alterar conforme necessário
-//const SERVER_URL = 'http://10.120.6.140:8000/api';
 const SERVER_URL = 'http://localhost:8000/api';
 
 function getTipos() {
